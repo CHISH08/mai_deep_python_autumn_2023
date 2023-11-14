@@ -4,15 +4,17 @@ import random
 import os
 import time
 
+
 class TicTacGame:
     """
     Класс игры крестики-нолики
     """
+
     def __init__(self):
         """
         Инициализация класса
         """
-        self.matrix = [['-' for _ in range(3)] for _ in range(3)]
+        self.matrix = [["-" for _ in range(3)] for _ in range(3)]
         self.step = []
         self.counter = 0
 
@@ -32,7 +34,7 @@ class TicTacGame:
         :param i: Номер строки.
         :param j: Номер столбца.
         """
-        self.matrix[i][j] = 'O' if self.counter % 2 else 'X'
+        self.matrix[i][j] = "O" if self.counter % 2 else "X"
         for row in self.matrix:
             print(*row)
         print()
@@ -79,7 +81,11 @@ class TicTacGame:
                     comp_count += 1
             self.output_process(i, j)
             if self.check_end():
-                print("Вы победили!" if self.counter % 2 + 1 == 2 else "Победил компьютер!")
+                print(
+                    "Вы победили!"
+                    if self.counter % 2 + 1 == 2
+                    else "Победил компьютер!"
+                )
                 break
             time.sleep(1)
         if not self.check_end():
@@ -105,25 +111,27 @@ class TicTacGame:
         """
         Начало игры
         """
-        os.system('clear')
+        os.system("clear")
         while True:
-            type_of_work = input("""
+            type_of_work = input(
+                """
 Введите тип режима игры:\n\t1: Компьютер против компьютера
 \t2: Компьютер против человека
 \t3: Человек против человека
 Для выхода введите: 0
-Ваш ввод: """)
-            os.system('clear')
-            self.matrix = [['-' for _ in range(3)] for _ in range(3)]
+Ваш ввод: """
+            )
+            os.system("clear")
+            self.matrix = [["-" for _ in range(3)] for _ in range(3)]
             self.step = []
             self.counter = 0
-            if type_of_work == '1':
+            if type_of_work == "1":
                 self.comp_comp_game()
-            elif type_of_work == '2':
+            elif type_of_work == "2":
                 self.comp_people_game()
-            elif type_of_work == '3':
+            elif type_of_work == "3":
                 self.people_people_game()
-            elif type_of_work == '0':
+            elif type_of_work == "0":
                 break
             else:
                 print("Некорректный режим!")
@@ -133,14 +141,14 @@ class TicTacGame:
         Проверка на конец игры
         """
         for i in range(3):
-            if self.matrix[i][0] == self.matrix[i][1] == self.matrix[i][2] != '-':
+            if self.matrix[i][0] == self.matrix[i][1] == self.matrix[i][2] != "-":
                 return True
-            if self.matrix[0][i] == self.matrix[1][i] == self.matrix[2][i] != '-':
+            if self.matrix[0][i] == self.matrix[1][i] == self.matrix[2][i] != "-":
                 return True
 
-        if self.matrix[0][0] == self.matrix[1][1] == self.matrix[2][2] != '-':
+        if self.matrix[0][0] == self.matrix[1][1] == self.matrix[2][2] != "-":
             return True
-        if self.matrix[0][2] == self.matrix[1][1] == self.matrix[2][0] != '-':
+        if self.matrix[0][2] == self.matrix[1][1] == self.matrix[2][0] != "-":
             return True
 
         return False
@@ -151,20 +159,27 @@ class TicTacGame:
         :param input_list: ввод пользователя(разделенный по пробелу)
         """
         if len(input_list) == 2:
-            if input_list[0] is not None and input_list[1] is not None\
-            and (input_list[0].isdigit() and input_list[1].isdigit()):
+            if (
+                input_list[0] is not None
+                and input_list[1] is not None
+                and (input_list[0].isdigit() and input_list[1].isdigit())
+            ):
                 input_list[0], input_list[1] = int(input_list[0]), int(input_list[1])
             else:
-                print("Должно быть введено 2 ЦЕЛЫХ числа,",
-                      "принадлежащих отрезу от 0 до 2 включительно!\n",
-                      "Пример ввода: 1 2")
+                print(
+                    "Должно быть введено 2 ЦЕЛЫХ числа,",
+                    "принадлежащих отрезу от 0 до 2 включительно!\n",
+                    "Пример ввода: 1 2",
+                )
                 return False
         else:
-            print("Должно быть введено 2 целых числа,",
-                  "принадлежащих отрезу от 0 до 2 включительно!\n",
-                  "Пример ввода: 1 2")
+            print(
+                "Должно быть введено 2 целых числа,",
+                "принадлежащих отрезу от 0 до 2 включительно!\n",
+                "Пример ввода: 1 2",
+            )
             return False
-        if (input_list[0] in [0, 1, 2] and input_list[1] in [0, 1, 2]):
+        if input_list[0] in [0, 1, 2] and input_list[1] in [0, 1, 2]:
             if (input_list[0], input_list[1]) not in self.step:
                 self.step.append((input_list[0], input_list[1]))
                 return True
@@ -172,10 +187,13 @@ class TicTacGame:
             print(*self.step, sep="\n")
             print("уже заняты!")
             return False
-        print("Числа i, j должны быть целыми",
-              "и принадлежащими отрезу от 0 до 2 включительно!\n",
-              "Пример ввода: 1 2")
+        print(
+            "Числа i, j должны быть целыми",
+            "и принадлежащими отрезу от 0 до 2 включительно!\n",
+            "Пример ввода: 1 2",
+        )
         return False
+
 
 if __name__ == "__main__":
     game = TicTacGame()

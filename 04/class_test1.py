@@ -1,6 +1,7 @@
 import unittest
 from main1 import CustomClass
 
+
 class CustomClassTestCase(unittest.TestCase):
     def test_custom_x(self):
         self.assertEqual(CustomClass.custom_x, 50)
@@ -32,5 +33,6 @@ class CustomClassTestCase(unittest.TestCase):
         with self.assertRaises(AttributeError):
             inst.dynamic
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

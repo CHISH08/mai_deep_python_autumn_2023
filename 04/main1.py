@@ -2,8 +2,10 @@
 Point 1
 """
 
+
 class CustomMeta(type):
     """Metaclass"""
+
     def __new__(mcs, name, bases, attrs):
         new_attrs = {}
         for attr_name, attr_value in attrs.items():
@@ -16,6 +18,7 @@ class CustomMeta(type):
 
 class CustomClass(metaclass=CustomMeta):
     """Customclass"""
+
     x = 50
 
     def __init__(self, val=99):
@@ -27,7 +30,8 @@ class CustomClass(metaclass=CustomMeta):
 
     def __str__(self):
         return "Custom_by_metaclass"
+
     def __setattr__(self, name, val):
         if not name.startswith("__"):
-            return super().__setattr__("custom_"+name, val)
+            return super().__setattr__("custom_" + name, val)
         return super().__setattr__(name, val)
